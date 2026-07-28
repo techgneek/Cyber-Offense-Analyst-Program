@@ -1,8 +1,8 @@
-# AetosAI Lab Threat Model
+# Lab Threat Model
 
 ## Scope
 
-This threat model covers the non-production AetosAI lab clone that will be deployed into Azure for security testing. It does not cover the live production application or any production data, secrets, or infrastructure.
+This threat model covers the non-production lab environment that will be deployed into Azure for security testing. It does not cover the live production application or any production data, secrets, or infrastructure.
 
 ## System Summary
 

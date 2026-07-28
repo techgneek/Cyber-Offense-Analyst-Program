@@ -189,23 +189,40 @@ The authorized testing boundaries are documented in `docs/testing-scope/rules-of
 
 ## Threat Model and Trust Boundaries
 
-The detailed threat model lives in `docs/threat-model/aetosai-threat-model.md`. The main README keeps the summary visible so the case-study story stays linear.
+This section summarizes the lab threat model directly in the main README so the case study stays self-contained.
 
-### Main trust boundaries
+### Scope
 
-- Browser to application server.
-- Application server to Gemini API.
-- GitHub Actions to Azure through OIDC.
-- Terraform / lifecycle scripts to the Azure control plane.
-- Synthetic test data to lab-only storage and browser caches.
+The threat model covers the non-production lab environment only. It excludes any live production application, production data, production credentials, or non-lab infrastructure.
 
-### Main assets
+### System summary
 
-- Lab source code.
-- Terraform state and deployment metadata.
-- Lab API keys and GitHub workflow secrets.
-- Synthetic evidence and analyst notes.
-- Azure lab resources and telemetry.
+The program target is a single-service web application used for security testing and evidence capture. It includes browser-facing workflows, server-side request handling, third-party AI integration, and lab-generated evidence that is reviewed during the case study.
+
+### Assets
+
+| Asset | Why it matters |
+| --- | --- |
+| Lab application and supporting source material | The primary object of analysis for the case study |
+| Azure lab environment | The isolated hosting boundary for the program |
+| Workflow secrets and deployment metadata | Required for repeatable lab operations |
+| Synthetic evidence and analyst notes | The evidence trail used to prove remediation |
+| Browser cache and client-side records | Useful for testing, but not authoritative as evidence |
+
+### Users
+
+- Lab analyst: reviews scenarios, evidence, and findings.
+- Lab tester: runs validated security tests in scope.
+- Lab observer: inspects non-sensitive state and documented evidence.
+- Lab administrator: deploys, stops, starts, and destroys the lab.
+
+### Trust boundaries
+
+1. Browser to application server.
+2. Application server to external AI service.
+3. GitHub Actions to Azure through OIDC.
+4. Terraform and lifecycle scripts to the Azure control plane.
+5. Synthetic test data to lab-only storage and browser caches.
 
 ### Risk themes
 
