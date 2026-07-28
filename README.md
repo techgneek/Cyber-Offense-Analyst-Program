@@ -88,7 +88,7 @@ This section summarizes the enterprise-level shape of the program target without
 - The app does not need a heavyweight database for the current baseline.
 - Cost control matters, so the README and supporting docs treat stop/start behavior as a first-class concern.
 
-### Supporting document
+### Assessment reference
 
 - [Application assessment](docs/application-assessment.md)
 
@@ -183,7 +183,7 @@ The authorized testing boundaries are documented in `docs/testing-scope/rules-of
 - Data handling: use synthetic data only and preserve evidence carefully.
 - Emergency stop: halt the test, stop the lab, preserve evidence, and report the issue.
 
-### Supporting document
+### ROE reference
 
 - [Rules of engagement](docs/testing-scope/rules-of-engagement.md)
 
@@ -231,7 +231,7 @@ The program target is a single-service web application used for security testing
 - Excessive agency in testing flows.
 - Cost and availability abuse.
 
-### Supporting document
+### Threat model reference
 
 - [Threat model](docs/threat-model/aetosai-threat-model.md)
 
@@ -378,11 +378,11 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Test | Replay the endpoint and compare before/after. |
 | Validate | Confirm the note is rendered safely and no longer behaves like executable markup. |
 
-### Findings management overview
+### Finding artifacts
 
-The repository already includes reusable finding-management artifacts so the lab can behave like a real analyst workflow.
+These artifacts support the ticket workflow and analyst handoff.
 
-#### Core artifacts
+#### Ticket and reporting artifacts
 
 - [Finding template](findings/templates/finding-template.md)
 - [Analyst workbook](findings/templates/analyst-investigation-workbook.csv)
