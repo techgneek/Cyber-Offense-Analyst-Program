@@ -25,7 +25,7 @@ The application is already a non-trivial single-service web app, and the safest 
 
 ### Packaging And Deployment
 
-- A multi-stage [Dockerfile](../Dockerfile) already exists.
+- The repository includes container deployment guidance in the case-study docs.
 - The runtime container exposes port 3000 and runs the compiled server bundle in production.
 - Terraform already exists under [infrastructure/](../infrastructure).
 - The lab Terraform environment is wired for Azure Container Apps, not a VM-first design.
@@ -116,7 +116,7 @@ Recommended Azure target: Azure Container Apps.
 
 Reasoning:
 
-- The app already has a Dockerfile, so container deployment is straightforward.
+- Container deployment is documented as part of the lab workflow.
 - The app is a single-process Node service, which fits Container Apps well.
 - Scale-to-zero lowers idle cost for a lab that will not run continuously.
 - WebSocket support is already part of the app architecture.
@@ -155,7 +155,7 @@ Keep the existing top-level structure and continue using:
 - [findings/](../findings)
 - [infrastructure/](../infrastructure)
 - [metrics/](../metrics)
-- [scripts/](../scripts)
+- [runbooks/](../runbooks)
 - [.github/workflows/](../.github/workflows)
 
 Do not move the application into a new folder unless a future phase genuinely requires it.

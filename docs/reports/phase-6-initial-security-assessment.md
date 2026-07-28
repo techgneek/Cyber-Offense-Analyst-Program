@@ -13,7 +13,7 @@ An external passive validation pass was then completed against the Azure-hosted 
 - `curl -i http://127.0.0.1:3000/api/scenarios`
 - `curl -I http://127.0.0.1:3000/`
 - `nmap -sV -Pn -p 3000 127.0.0.1`
-- `bash ./scripts/phase6-discovery.sh https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io`
+- Phase 6 discovery workflow executed against the lab endpoint.
 
 ## Tool Availability
 

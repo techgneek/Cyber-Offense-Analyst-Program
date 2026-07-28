@@ -27,7 +27,7 @@ Suggested checks:
 You can also run the helper script from the lab repo once the lab hostname is known:
 
 ```bash
-./scripts/phase6-discovery.sh <lab-hostname-or-ip>
+Phase 6 discovery workflow against the lab endpoint.
 ```
 
 The helper accepts a hostname, `host:port`, or full URL and will use the safe service-detection port for Nmap.

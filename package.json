@@ -8,9 +8,7 @@
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit",
-    "security:scan:secrets": "bash scripts/secret-scan-local.sh full",
-    "security:hooks:install": "bash scripts/setup-git-hooks.sh"
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

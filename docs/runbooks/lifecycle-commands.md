@@ -12,37 +12,13 @@ These commands are the operational wrapper around the lab Terraform stack and Az
 - A valid application image and infrastructure variables once the lab stack is fully wired.
 - The GitHub Actions deploy workflow is a bootstrap path that uses the Phase 2 local-state pattern; it keeps the Terraform lockfile for traceability but does not ship state artifacts.
 
-## Commands
+## Lifecycle operations
 
-### Deploy
-
-`./scripts/deploy.sh`
-
-Runs formatting, Terraform validation, Checkov, plan review, confirmation, apply, and a non-destructive health check.
-
-### Start
-
-`./scripts/start.sh`
-
-Restores runtime compute after a stop. For containerized hosting, this scales the app back above zero replicas. For App Service, it starts the web app.
-
-### Stop
-
-`./scripts/stop.sh`
-
-Reduces runtime cost without destroying the environment. For containerized hosting, it scales the app toward zero. For App Service, it stops the web app.
-
-### Status
-
-`./scripts/status.sh`
-
-Reports the active subscription, resource group, hosting status, app URL, and readiness indicators.
-
-### Destroy
-
-`./scripts/destroy.sh`
-
-Shows a destroy plan, requires confirmation, applies the destroy, and verifies the resource group removal.
+- Deploy: validate prerequisites, review infrastructure changes, apply the lab stack, and confirm the environment is healthy.
+- Start: restore runtime capacity after a stop.
+- Stop: reduce runtime cost without destroying the environment.
+- Status: report the active subscription, resource group, hosting status, endpoint, and readiness indicators.
+- Destroy: confirm the teardown plan, remove the lab, and verify cleanup.
 
 ## Residual Cost Notes
 
