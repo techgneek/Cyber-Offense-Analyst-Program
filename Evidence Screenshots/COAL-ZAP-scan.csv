@@ -1,0 +1,31 @@
+Processed,Method,URI,Flags
+true,GET,https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io,Seed
+true,GET,https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io/robots.txt,Seed
+true,GET,https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io/sitemap.xml,Seed
+true,GET,https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io/assets/index-CTlB_shT.css,
+true,GET,https://cyber-offense-lab-app-jd4des--t3l1k4b.jollybeach-5537f22a.eastus.azurecontainerapps.io/assets/index-LZ6gpdFP.js,
+false,GET,https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700,Out of Scope
+false,GET,https://react.dev/errors/%60+e;if,Out of Scope
+false,GET,"http://www.w3.org/2000/svg%60,a",Out of Scope
+false,GET,"http://www.w3.org/1998/Math/MathML%60,a",Out of Scope
+false,GET,http://www.w3.org/2000/svg%60%7C%7Co.hasAttribute,Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:href%60,n",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:actuate%60,r",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:arcrole%60,r",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:role%60,r",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:show%60,r",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:title%60,r",Out of Scope
+false,GET,"http://www.w3.org/1999/xlink%60,%60xlink:type%60,r",Out of Scope
+false,GET,"http://www.w3.org/XML/1998/namespace%60,%60xml:base%60,r",Out of Scope
+false,GET,"http://www.w3.org/XML/1998/namespace%60,%60xml:lang%60,r",Out of Scope
+false,GET,"http://www.w3.org/XML/1998/namespace%60,%60xml:space%60,r",Out of Scope
+false,GET,http://www.w3.org/2000/svg%60:return,Out of Scope
+false,GET,http://www.w3.org/1998/Math/MathML%60:return,Out of Scope
+false,GET,http://www.w3.org/2000/svg%60,Out of Scope
+false,GET,"http://www.w3.org/2000/svg%60,width:24,height:24,viewBox:%600",Out of Scope
+false,GET,https://www.nist.gov/itl/ai-risk-management-framework%60,Out of Scope
+false,GET,https://owasp.org/www-project-top-10-for-large-language-model-applications/%60,Out of Scope
+false,GET,https://owasp.org/www-project-agentic-ai-risks/%60,Out of Scope
+false,GET,https://atlas.mitre.org/%60,Out of Scope
+false,GET,https://www.iso.org/standard/81230.html%60,Out of Scope
+false,GET,https://www.cisa.gov/ai%60,Out of Scope
