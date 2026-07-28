@@ -322,12 +322,16 @@ This case study is organized as ticket-style enterprise workflows rather than is
 <p align="center">
   <table>
     <tr>
-      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20Before.png" alt="XSS Burp before" width="480" /></td>
-      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20After.png" alt="XSS Burp after" width="480" /></td>
+      <th align="center">Before proof (vulnerable state)</th>
+      <th align="center">After proof (remediated state)</th>
     </tr>
     <tr>
-      <td align="center"><img src="Evidence%20Screenshots/XSS-before-browser-vulnerable-state.png" alt="XSS browser before" width="480" /></td>
-      <td align="center"><img src="Evidence%20Screenshots/XSS-after-browser-fixed-state.png" alt="XSS browser after" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20Before.png" alt="AF-002 Burp before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20After.png" alt="AF-002 Burp after" width="480" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="Evidence%20Screenshots/XSS-before-browser-vulnerable-state.png" alt="AF-002 browser before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/XSS-after-browser-fixed-state.png" alt="AF-002 browser after" width="480" /></td>
     </tr>
   </table>
 </p>
