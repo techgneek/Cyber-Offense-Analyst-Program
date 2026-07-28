@@ -13,13 +13,13 @@
   <img src="https://img.shields.io/badge/Security-GitHub%20Actions%20%2B%20Burp%20%2B%20ZAP-9A3412?style=for-the-badge" alt="Security GitHub Actions Burp ZAP" />
 </p>
 
-## Inception State vs Completion State
+## Inception State
 
-| Inception State | Completion State |
-| --- | --- |
-| No isolated lab story, no formal evidence trail, and no linear analyst workflow. | An isolated Azure lab with lifecycle controls, CI/CD security checks, evidence-driven findings, and documented remediation/retest proof. |
-| No single README that tells the full case-study story. | A single main README that reads like a Cyber Offense Analyst case study from discovery through validation. |
-| No structured mapping between findings, evidence, and analyst ownership. | Findings, evidence, metrics, and remediation artifacts are all linked and reviewable. |
+At inception, the program was an isolated lab with useful security exercises but no single story tying the work together. The evidence trail was fragmented, the analyst workflow was not presented as a linear lifecycle, and the repository still looked more like a technical project than a polished case study.
+
+## Completion State
+
+At completion, the repository presents a clean Cyber Offense Analyst case study that reads from discovery through validation. The findings, evidence, metrics, and remediation artifacts are connected in one narrative, so the reviewer can follow the program as an enterprise-style workflow instead of a set of disconnected notes.
 
 ## Table of Contents
 
