@@ -1,7 +1,7 @@
 <h1 align="center">AetosAI Security Mentor</h1>
 
 <p align="center">
-  Cyber Offense Analyst Program Simulation for Azure-hosted application security testing, CI/CD validation, evidence capture, and remediation practice.
+  Cyber Offense Analyst Program case study for Azure lab security, evidence capture, and remediation practice.
 </p>
 
 <p align="center">
@@ -50,12 +50,12 @@
 
 ## Architecture at a Glance
 
-AetosAI Security Mentor is a single-service web application that is being used as the basis for the Cyber Offense Analyst lab. The repo combines the application, infrastructure, evidence, and security workflow layers into one reviewable program.
+AetosAI Security Mentor began as a single-service web application, but this repository now presents the Cyber Offense Analyst case study around that lab as a documentation-first program narrative.
 
 ### High-level flow
 
-1. A browser or Kali workstation talks to the lab application.
-2. The application runs as a React + Vite frontend with a Node/Express backend.
+1. A browser or Kali workstation talks to the lab target.
+2. The target is described in the case-study docs as a React + Vite frontend with a Node/Express backend.
 3. Terraform provisions Azure lab infrastructure.
 4. GitHub Actions builds, scans, and deploys the lab artifacts.
 5. Burp Suite and ZAP provide manual and baseline validation evidence.
@@ -66,7 +66,7 @@ AetosAI Security Mentor is a single-service web application that is being used a
 | Component | Purpose |
 | --- | --- |
 | Browser / Kali VM | Analyst workstation for manual validation and evidence capture |
-| Application | AetosAI Security Mentor lab clone |
+| Program target | AetosAI Security Mentor case-study lab |
 | Terraform | Provisions Azure lab infrastructure |
 | Azure Container Apps | Low-cost lab hosting target |
 | GitHub Actions | CI/CD and security workflow automation |
