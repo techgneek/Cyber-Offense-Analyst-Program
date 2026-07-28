@@ -1,4 +1,4 @@
-<h1 align="center">AetosAI Security Mentor</h1>
+<h1 align="center">Cyber Offense Analyst Program</h1>
 
 <p align="center">
   Cyber Offense Analyst Program case study for Azure lab security, evidence capture, and remediation practice.
@@ -41,16 +41,16 @@
 ## Visual Overview
 
 <p align="center">
-  <img src="docs/assets/aetosai-hero.png" alt="AetosAI Security Mentor hero image" width="1100" />
+  <img src="docs/assets/aetosai-hero.png" alt="Cyber Offense Analyst Program hero image" width="1100" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/aetosai-architecture.svg" alt="AetosAI Security Mentor architecture diagram" width="1100" />
+  <img src="docs/assets/aetosai-architecture.svg" alt="Cyber Offense Analyst Program architecture diagram" width="1100" />
 </p>
 
 ## Architecture at a Glance
 
-AetosAI Security Mentor began as a single-service web application, but this repository now presents the Cyber Offense Analyst case study around that lab as a documentation-first program narrative.
+The Cyber Offense Analyst Program is presented here as a documentation-first case study with the application details intentionally abstracted away from the main story.
 
 ### High-level flow
 
@@ -65,34 +65,28 @@ AetosAI Security Mentor began as a single-service web application, but this repo
 
 | Component | Purpose |
 | --- | --- |
-| Browser / Kali VM | Analyst workstation for manual validation and evidence capture |
-| Program target | AetosAI Security Mentor case-study lab |
-| Terraform | Provisions Azure lab infrastructure |
-| Azure Container Apps | Low-cost lab hosting target |
-| GitHub Actions | CI/CD and security workflow automation |
-| Burp Suite / ZAP | Proxying, manual validation, and baseline DAST |
-| Findings workbook | Analyst tracking for ownership and closure |
+| Browser / analyst workstation | Manual validation and evidence capture |
+| Program target | Cyber Offense Analyst Program case-study lab |
+| Infrastructure layer | Repeatable cloud provisioning for the lab |
+| Hosting layer | Low-cost Azure hosting target |
+| Automation layer | Build, scan, and deploy workflow support |
+| Validation layer | Proxying, manual verification, and baseline DAST |
+| Findings layer | Analyst tracking for ownership and closure |
 
 ## Application Assessment
 
-The current repository has already been inspected and documented in `docs/application-assessment.md`. The assessment confirms the app stack and recommends the lowest-cost practical Azure hosting pattern for the lab.
+This section summarizes the enterprise-level shape of the program target without exposing implementation details.
 
 ### Confirmed facts
 
-| Category | Confirmed value |
+| Category | Enterprise baseline |
 | --- | --- |
-| Language | TypeScript |
-| Frontend | React 19 + Vite 8 |
-| Server | Node.js + Express |
-| Package manager | npm |
-| Dev command | `npm run dev` |
-| Build command | `npm run build` |
-| Start command | `npm start` |
-| Listen port | `3000` |
-| Docker | Yes, a multi-stage Dockerfile exists |
-| Database | None required for the current lab baseline |
-| External AI dependency | Google Gemini via `@google/genai` |
-| Hosting recommendation | Azure Container Apps with scale-to-zero |
+| Application type | Single-service web application |
+| Runtime | Modern JavaScript/TypeScript stack |
+| Deployment model | Container-ready, with repeatable infrastructure support |
+| Data layer | Lightweight baseline without an enterprise database requirement |
+| External dependency | One third-party AI service integration |
+| Hosting posture | Low-cost Azure hosting with scale-to-zero characteristics |
 
 ### Assessment summary
 
@@ -190,7 +184,7 @@ The authorized testing boundaries are documented in `docs/testing-scope/rules-of
 ### Summary
 
 - Authorized targets: the isolated Azure lab, the lab app, and synthetic test identities.
-- Prohibited targets: production AetosAI, `aetosai.io`, production credentials, and non-lab systems.
+- Prohibited targets: production program systems, live domains, production credentials, and non-lab systems.
 - Permitted tests: passive discovery, header review, safe API enumeration, Burp, ZAP Baseline, Nmap discovery, and repository scanning.
 - Prohibited tests: destructive activity, uncontrolled brute force, malware, credential abuse, and anything outside the lab.
 - Data handling: use synthetic data only and preserve evidence carefully.
