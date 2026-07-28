@@ -41,8 +41,7 @@
 | Before | After |
 | --- | --- |
 | ![AF-001 code before](../Evidence%20Screenshots/BAC-code-before.png) | ![AF-001 code after](../Evidence%20Screenshots/BAC-code-after.png) |
-| ![AF-001 Burp before](../Evidence%20Screenshots/BAC-before-tenant-mismatch.png) | ![AF-001 Burp after](../Evidence%20Screenshots/BAC-after-tenant-mismatch-fix.png) |
-| ![AF-001 webapp after](../Evidence%20Screenshots/BAC-webapp-after-403.png) |  |
+| ![AF-001 Burp before](../Evidence%20Screenshots/BAC-before-tenant-mismatch.png) | ![AF-001 webapp after](../Evidence%20Screenshots/BAC-webapp-after-403.png) |
 
 ## Full Vulnerability Reports
 
