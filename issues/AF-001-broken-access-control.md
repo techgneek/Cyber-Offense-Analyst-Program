@@ -41,6 +41,10 @@
 <p align="center">
   <table>
     <tr>
+      <th align="center">Before proof</th>
+      <th align="center">After proof</th>
+    </tr>
+    <tr>
       <td align="center"><img src="../Evidence%20Screenshots/BAC-code-before.png" alt="AF-001 code before" width="480" /></td>
       <td align="center"><img src="../Evidence%20Screenshots/BAC-code-after.png" alt="AF-001 code after" width="480" /></td>
     </tr>

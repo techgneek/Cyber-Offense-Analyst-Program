@@ -38,7 +38,7 @@
 
 ## Visual Evidence
 
-| Before | After |
+| Before proof | After proof |
 | --- | --- |
 | ![AF-002 Burp before](../Evidence%20Screenshots/XSS%20-%20:api:training:%20Before.png) | ![AF-002 Burp after](../Evidence%20Screenshots/XSS%20-%20:api:training:%20After.png) |
 | ![AF-002 browser before](../Evidence%20Screenshots/XSS-before-browser-vulnerable-state.png) | ![AF-002 browser after](../Evidence%20Screenshots/XSS-after-browser-fixed-state.png) |
