@@ -1,5 +1,7 @@
 <h1 align="center">Cyber Offense Analyst Program</h1>
 
+<img width="1774" height="887" alt="ChatGPT Image Jul 28, 2026, 01_12_27 AM" src="https://github.com/user-attachments/assets/73e652b2-5c8d-4f6b-8682-eee82a8e0575" />
+
 <p align="center">
   Cyber Offense Analyst Program case study for Azure lab security, evidence capture, and remediation practice.
 </p>
