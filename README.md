@@ -249,10 +249,18 @@ This case study is organized as ticket-style enterprise workflows rather than is
 
 **Visual evidence:**
 
-| Before | After |
-| --- | --- |
-| ![AF-001 code before](Evidence%20Screenshots/BAC-code-before.png) | ![AF-001 code after](Evidence%20Screenshots/BAC-code-after.png) |
-| ![AF-001 Burp before](Evidence%20Screenshots/BAC-before-tenant-mismatch.png) | ![AF-001 webapp after](Evidence%20Screenshots/BAC-webapp-after-403.png) |
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="Evidence%20Screenshots/BAC-code-before.png" alt="AF-001 code before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/BAC-code-after.png" alt="AF-001 code after" width="480" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="Evidence%20Screenshots/BAC-before-tenant-mismatch.png" alt="AF-001 Burp before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/BAC-webapp-after-403.png" alt="AF-001 webapp after" width="480" /></td>
+    </tr>
+  </table>
+</p>
 
 **Evidence index:**
 
