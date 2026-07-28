@@ -39,6 +39,8 @@
 
 ## Architecture at a Glance
 
+<img width="1672" height="941" alt="ChatGPT Image Jul 28, 2026, 01_10_02 AM" src="https://github.com/user-attachments/assets/f54c0595-8430-40d9-9ed0-118a8eba6fb7" />
+
 The Cyber Offense Analyst Program is presented here as a documentation-first case study with the application details intentionally abstracted away from the main story.
 
 ### High-level flow
