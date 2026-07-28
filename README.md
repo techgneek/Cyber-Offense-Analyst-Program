@@ -21,6 +21,7 @@
 
 ## Table of Contents
 
+- [Visual Overview](#visual-overview)
 - [Architecture at a Glance](#architecture-at-a-glance)
 - [Application Assessment](#application-assessment)
 - [Build and Deployment Flow](#build-and-deployment-flow)
@@ -36,6 +37,16 @@
 - [Lessons Learned / Program Outcome](#lessons-learned--program-outcome)
 - [Deeper Investigation Archive](#deeper-investigation-archive)
 - [Program Demos and Supporting Notes](#program-demos-and-supporting-notes)
+
+## Visual Overview
+
+<p align="center">
+  <img src="docs/assets/aetosai-hero.png" alt="AetosAI Security Mentor hero image" width="1100" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/aetosai-architecture.svg" alt="AetosAI Security Mentor architecture diagram" width="1100" />
+</p>
 
 ## Architecture at a Glance
 
@@ -234,6 +245,14 @@ This case study currently centers on two documented security scenarios that alre
 - [Broken access control worksheet](docs/aa/broken-access-control/worksheet.md)
 - [Burp workflow](docs/aa/broken-access-control/burp-workflow.md)
 
+**Visual evidence:**
+
+| Before | After |
+| --- | --- |
+| ![BAC code before](Evidence Screenshots/BAC-code-before.png) | ![BAC code after](Evidence Screenshots/BAC-code-after.png) |
+| ![BAC Burp before](Evidence Screenshots/BAC-before-tenant-mismatch.png) | ![BAC Burp after](Evidence Screenshots/BAC-after-tenant-mismatch-fix.png) |
+| ![BAC webapp after](Evidence Screenshots/BAC-webapp-after-403.png) |  |
+
 **Evidence index:**
 
 | Artifact | What it proves |
@@ -273,6 +292,21 @@ This case study currently centers on two documented security scenarios that alre
 **Key docs:**
 - [Stored XSS README](docs/aa/stored-xss-training/README.md)
 - [Stored XSS worksheet](docs/aa/stored-xss-training/worksheet.md)
+
+**Visual evidence:**
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20Before.png" alt="XSS Burp before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/XSS%20-%20:api:training:%20After.png" alt="XSS Burp after" width="480" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="Evidence%20Screenshots/XSS-before-browser-vulnerable-state.png" alt="XSS browser before" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/XSS-after-browser-fixed-state.png" alt="XSS browser after" width="480" /></td>
+    </tr>
+  </table>
+</p>
 
 **Evidence index:**
 
