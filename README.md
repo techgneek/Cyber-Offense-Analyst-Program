@@ -233,17 +233,26 @@ The detailed threat model lives in `docs/threat-model/aetosai-threat-model.md`. 
 
 ## Security Testing Scenarios
 
-This case study currently centers on two documented security scenarios that already have before/fix/after evidence trails.
+This case study is organized as ticket-style enterprise workflows rather than isolated writeups. Each scenario includes a ticket summary, visual evidence, ownership snapshot, control mapping, and remediation handoff.
 
 ### 1) Broken Access Control
 
 **Scenario summary:** a tenant-scoped evidence lookup returns data that should be blocked until an authorization check is applied.
 
-**Key docs:**
-- [Broken access control README](docs/aa/broken-access-control/README.md)
-- [Broken access control report](docs/aa/broken-access-control/report.md)
-- [Broken access control worksheet](docs/aa/broken-access-control/worksheet.md)
-- [Burp workflow](docs/aa/broken-access-control/burp-workflow.md)
+**Ticket summary:**
+
+| Ticket Field | AF-001 Detail |
+| --- | --- |
+| Ticket source | `issues/AF-001-broken-access-control.md` |
+| Finding ID | AF-001 |
+| Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Ownership and priority | Suggested owner: API owner, Priority: P1 |
+| Problem statement | Tenant-scoped evidence lookup exposed data that should have been blocked by authorization |
+| OWASP linkage | OWASP A01: Broken Access Control / API1: Broken Object Level Authorization |
+| Risk statement | Unauthorized object access can expose tenant-specific evidence and undermine tenant isolation |
+| Recommended remediation | Add an authorization guard, restrict object access by tenant, and validate the caller’s entitlement before returning the evidence record |
+| Validation plan | Capture the vulnerable request, apply the authorization fix, replay the same request, and record the after-state evidence |
+| Definition of done | The same request returns `403 Forbidden`, the workbook is updated, and the finding is closed with before/after evidence |
 
 **Visual evidence:**
 
@@ -289,9 +298,20 @@ This case study currently centers on two documented security scenarios that alre
 
 **Scenario summary:** a training note board renders note content as HTML so the same payload can be observed before remediation, then safely after the sink is fixed.
 
-**Key docs:**
-- [Stored XSS README](docs/aa/stored-xss-training/README.md)
-- [Stored XSS worksheet](docs/aa/stored-xss-training/worksheet.md)
+**Ticket summary:**
+
+| Ticket Field | AF-002 Detail |
+| --- | --- |
+| Ticket source | `issues/AF-002-stored-xss-training-board.md` |
+| Finding ID | AF-002 |
+| Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Ownership and priority | Suggested owner: frontend/application owner, Priority: P1 |
+| Problem statement | Stored note content was rendered as HTML, allowing untrusted markup to behave like executable browser content |
+| OWASP linkage | OWASP A03: Injection / A08: Software and Data Integrity Failures |
+| Risk statement | Persisted markup can execute in the browser, alter what analysts see, and weaken trust in the evidence trail |
+| Recommended remediation | Render stored note content as inert text or sanitize the sink before display |
+| Validation plan | Capture the vulnerable response, fix the sink, replay the same note path, and verify the payload is now harmless text |
+| Definition of done | The same content renders safely, the workbook is updated, and the finding is closed with before/after evidence |
 
 **Visual evidence:**
 
@@ -348,6 +368,12 @@ The repository already includes reusable finding-management artifacts so the lab
 - [Finding template](findings/templates/finding-template.md)
 - [Analyst workbook](findings/templates/analyst-investigation-workbook.csv)
 - [Metrics overview](metrics/README.md)
+- [AF-001 ticket](issues/AF-001-broken-access-control.md)
+- [AF-002 ticket](issues/AF-002-stored-xss-training-board.md)
+- [AppSec findings report](reports/appsec-findings-report.md)
+- [OWASP mapping report](reports/owasp-top-10-mapping.md)
+- [Remediation plan](reports/remediation-plan.md)
+- [Secure SDLC / NIST mapping](reports/secure-sdlc-nist-mapping.md)
 
 ### What gets recorded
 
@@ -371,6 +397,15 @@ The finding template and workbook are intended to keep the same core fields for 
 ## Remediation and Validation Proof
 
 The value of the case study comes from showing that the same request or behavior was observed before the fix and then validated after the fix.
+
+### Visual remediation workflow
+
+| Stage | What the reviewer sees | Evidence |
+| --- | --- | --- |
+| Before | Vulnerable request / browser state | Burp capture, browser screenshot, code snapshot |
+| Fix | Minimum code or configuration change | Diff, commit, or config update |
+| After | Same path retested | Replayed Burp request, browser retest |
+| Closure | Finding marked resolved | Workbook entry, report update, closure note |
 
 ### What the proof should show
 
