@@ -13,7 +13,7 @@
     "security:hooks:install": "bash scripts/setup-git-hooks.sh"
   },
   "dependencies": {
-    "@google/genai": "^2.4.0",
+    "@google/genai": "^2.13.0",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^6.0.3",
     "dotenv": "^17.2.3",
