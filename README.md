@@ -29,7 +29,6 @@
 - [Analyst Lifecycle](#analyst-lifecycle)
 - [Testing Scope and Rules of Engagement](#testing-scope-and-rules-of-engagement)
 - [Threat Model and Trust Boundaries](#threat-model-and-trust-boundaries)
-- [Security Testing Scenarios](#security-testing-scenarios)
 - [Finding Intake, Risk Mapping, and Ownership](#finding-intake-risk-mapping-and-ownership)
 - [Remediation and Validation Proof](#remediation-and-validation-proof)
 - [Evidence Index](#evidence-index)
@@ -225,7 +224,7 @@ The detailed threat model lives in `docs/threat-model/aetosai-threat-model.md`. 
 
 - [Threat model](docs/threat-model/aetosai-threat-model.md)
 
-## Security Testing Scenarios
+## Finding Intake, Risk Mapping, and Ownership
 
 This case study is organized as ticket-style enterprise workflows rather than isolated writeups. Each scenario includes a ticket summary, visual evidence, ownership snapshot, control mapping, and remediation handoff.
 
@@ -353,11 +352,11 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Test | Replay the endpoint and compare before/after. |
 | Validate | Confirm the note is rendered safely and no longer behaves like executable markup. |
 
-## Finding Intake, Risk Mapping, and Ownership
+### Findings management overview
 
 The repository already includes reusable finding-management artifacts so the lab can behave like a real analyst workflow.
 
-### Core artifacts
+#### Core artifacts
 
 - [Finding template](findings/templates/finding-template.md)
 - [Analyst workbook](findings/templates/analyst-investigation-workbook.csv)
