@@ -37,16 +37,6 @@
 - [Deeper Investigation Archive](#deeper-investigation-archive)
 - [Program Demos and Supporting Notes](#program-demos-and-supporting-notes)
 
-## Visual Overview
-
-<p align="center">
-  <img src="docs/assets/aetosai-hero.png" alt="Cyber Offense Analyst Program hero image" width="1100" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/aetosai-architecture.svg" alt="Cyber Offense Analyst Program architecture diagram" width="1100" />
-</p>
-
 ## Architecture at a Glance
 
 The Cyber Offense Analyst Program is presented here as a documentation-first case study with the application details intentionally abstracted away from the main story.
@@ -415,14 +405,6 @@ The value of the case study comes from showing that the same request or behavior
 | After | Same path retested | Replayed Burp request, browser retest |
 | Closure | Finding marked resolved | Workbook entry, report update, closure note |
 
-### What the proof should show
-
-- The vulnerable behavior in Burp or the browser.
-- The code or configuration change that removed the weakness.
-- The same path retested after the fix.
-- A final browser or HTTP result proving the behavior changed.
-- A workbook or finding record that marks the issue as closed only after the retest passes.
-
 ### Common validation pattern
 
 | Step | Evidence type |
@@ -431,18 +413,6 @@ The value of the case study comes from showing that the same request or behavior
 | Fix | Source code or configuration diff |
 | After | Replayed request and browser retest |
 | Closure | Notes, workbook entry, and metrics update |
-
-## Evidence Index
-
-### Main lab evidence references
-
-| Area | Evidence |
-| --- | --- |
-| Broken access control | `Evidence Screenshots/BAC-code-before.png`, `Evidence Screenshots/BAC-before-tenant-mismatch.png`, `Evidence Screenshots/BAC-code-after.png`, `Evidence Screenshots/BAC-after-tenant-mismatch-fix.png`, `Evidence Screenshots/BAC-webapp-after-403.png` |
-| Stored XSS | `Evidence Screenshots/XSS - :api:training: Before.png`, `Evidence Screenshots/XSS-before-browser-vulnerable-state.png`, `Evidence Screenshots/XSS - :api:training: After.png`, `Evidence Screenshots/XSS-after-browser-fixed-state.png` |
-| Other lab validation | Burp, ZAP, browser screenshots, and workbook notes as needed |
-
-Use the evidence index to keep the before / fix / after chain obvious at a glance.
 
 ## Metrics and Reporting
 
@@ -490,41 +460,3 @@ This project is meant to show a complete Cyber Offense Analyst workflow rather t
 ### Current outcome
 
 The case study now reads as a full lifecycle: assess the application, deploy the lab, validate the risks, record the findings, fix the issues, retest, and close them with supporting evidence and metrics.
-
-## Deeper Investigation Archive
-
-The AA folder holds the longer-form remediation writeups and exercises behind the main case-study story.
-
-- [AA archive index](docs/aa/README.md)
-- [Insecure CORS policy remediation](docs/aa/insecure-cors-policy/README.md)
-- [Broken access control remediation](docs/aa/broken-access-control/README.md)
-- [Stored XSS remediation](docs/aa/stored-xss-training/README.md)
-- [Cryptographic failures remediation](docs/aa/cryptographic-failures/README.md)
-- [Security logging and monitoring failures remediation](docs/aa/security-logging-monitoring-failures/README.md)
-
-## Program Demos and Supporting Notes
-
-These sections stay near the end so the README remains a linear case study first and a reference hub second.
-
-### Application walkthroughs
-
-- Voice mentor demo
-- Chat prompt demo
-- Common AI security questions
-- AI security reference library
-- Compliance evidence and red-team audit flow
-
-The media links remain in the deeper docs and supporting artifacts so the README can stay focused on the analyst story.
-
-### Security automation notes
-
-- CI workflow: `.github/workflows/security-ci.yml`
-- Deployment workflow: `.github/workflows/deploy-security-lab.yml`
-- Terraform security workflow: `.github/workflows/terraform-security.yml`
-- Dependency review workflow: `.github/workflows/dependency-review.yml`
-- Container security workflow: `.github/workflows/container-security.yml`
-- Passive DAST workflow: `.github/workflows/zap-baseline.yml`
-
-The current automation set covers the baseline case-study needs and keeps the story focused on the lab scope defined in this repository.
-
-The lab remains separate from production, and the stopping/starting of the environment should always be read as cost-control behavior rather than a claim that the environment becomes free.
