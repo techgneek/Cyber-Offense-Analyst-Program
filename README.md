@@ -252,8 +252,8 @@ This case study is organized as ticket-style enterprise workflows rather than is
 <p align="center">
   <table>
     <tr>
-      <th align="center">Before proof</th>
-      <th align="center">After proof</th>
+      <th align="center">Before proof (vulnerable state)</th>
+      <th align="center">After proof (remediated state)</th>
     </tr>
     <tr>
       <td align="center"><img src="Evidence%20Screenshots/BAC-code-before.png" alt="AF-001 code before" width="480" /></td>
