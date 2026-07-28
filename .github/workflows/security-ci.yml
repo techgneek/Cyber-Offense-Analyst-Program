@@ -1,0 +1,193 @@
+name: Security CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 8 * * 1"
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  build-and-sca:
+    name: Build and SCA (Phase 1 Observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: npm audit (capture JSON)
+        run: npm audit --json > npm-audit.json || true
+
+      - name: Summarize high/critical findings
+        run: |
+          node -e "const fs=require('fs');
+          let high=0, critical=0, total=0;
+          try {
+            const raw=fs.readFileSync('npm-audit.json','utf8');
+            const data=JSON.parse(raw);
+            const meta=data.metadata && data.metadata.vulnerabilities ? data.metadata.vulnerabilities : {};
+            high=Number(meta.high||0);
+            critical=Number(meta.critical||0);
+            total=Number(meta.total||0);
+          } catch (e) {
+            console.log('Could not parse npm-audit.json');
+          }
+          const lines=[
+            '## Security Phase 1 Summary',
+            '',
+            '- Mode: Observe and track (non-blocking)',
+            '- npm audit total vulnerabilities: ' + total,
+            '- npm audit high: ' + high,
+            '- npm audit critical: ' + critical,
+            '',
+            'If high/critical findings are present, track remediation in `findings/templates/analyst-investigation-workbook.csv` and the relevant finding record.'
+          ];
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');"
+
+      - name: Phase 3 gate - block critical npm vulnerabilities on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          node -e "const fs=require('fs');
+          let critical=0;
+          try {
+            const raw=fs.readFileSync('npm-audit.json','utf8');
+            const data=JSON.parse(raw);
+            const meta=data.metadata && data.metadata.vulnerabilities ? data.metadata.vulnerabilities : {};
+            critical=Number(meta.critical||0);
+          } catch (e) {
+            console.error('Could not parse npm-audit.json for Phase 3 gate evaluation');
+            process.exit(1);
+          }
+          if (critical > 0) {
+            console.error('Phase 3 gate failed: critical npm vulnerabilities detected (' + critical + ').');
+            process.exit(1);
+          }
+          console.log('Phase 3 gate passed: no critical npm vulnerabilities detected.');"
+
+      - name: Upload npm audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: npm-audit.json
+
+  codeql:
+    name: CodeQL (Phase 1 Observe)
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ vars.ENFORCE_CODEQL != 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4
+        continue-on-error: ${{ vars.ENFORCE_CODEQL != 'true' }}
+
+  secret-scan:
+    name: Secret Scan (Wave 2 Soft Gate)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.24.2/gitleaks_8.24.2_linux_x64.tar.gz -o gitleaks.tar.gz
+          tar -xzf gitleaks.tar.gz
+          chmod +x gitleaks
+
+      - name: Run gitleaks (collect report)
+        id: gitleaks
+        continue-on-error: true
+        run: |
+          ./gitleaks detect \
+            --source . \
+            --report-format sarif \
+            --report-path gitleaks.sarif \
+            --redact \
+            --verbose
+
+      - name: Summarize secret scan
+        id: summarize_secrets
+        run: |
+          node -e "const fs=require('fs');
+          let findings=0;
+          try {
+            const sarif=JSON.parse(fs.readFileSync('gitleaks.sarif','utf8'));
+            findings=Array.isArray(sarif.runs) && sarif.runs[0] && Array.isArray(sarif.runs[0].results)
+              ? sarif.runs[0].results.length
+              : 0;
+          } catch (e) {}
+          const lines=[
+            '## Secret Scan Summary',
+            '',
+            '- Mode: Soft gate (fail run when findings > 0)',
+            '- Scanner: gitleaks',
+            '- Potential secret findings: ' + findings,
+            '',
+            'Track remediation and false-positive triage in `findings/templates/analyst-investigation-workbook.csv` and the relevant finding record.'
+          ];
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');"
+
+      - name: Enforce soft gate on secret findings
+        run: |
+          node -e "const fs=require('fs');
+          let findings=0;
+          try {
+            const sarif=JSON.parse(fs.readFileSync('gitleaks.sarif','utf8'));
+            findings=Array.isArray(sarif.runs) && sarif.runs[0] && Array.isArray(sarif.runs[0].results)
+              ? sarif.runs[0].results.length
+              : 0;
+          } catch (e) {
+            console.error('Could not parse gitleaks.sarif for soft gate evaluation');
+            process.exit(1);
+          }
+          if (findings > 0) {
+            console.error(`Soft gate failed: ${findings} potential secret finding(s) detected.`);
+            process.exit(1);
+          }
+          console.log('Soft gate passed: no secret findings detected.');"
+
+      - name: Upload gitleaks SARIF artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-sarif
+          path: gitleaks.sarif
+
+      - name: Upload gitleaks SARIF to security tab
+        if: always()
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: gitleaks.sarif

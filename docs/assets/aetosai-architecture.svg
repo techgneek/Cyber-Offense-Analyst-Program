@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-labelledby="title desc">
+  <title id="title">Aetos AI Security Mentor architecture</title>
+  <desc id="desc">Architecture overview of the Aetos AI Security Mentor application, showing the frontend, learning workflows, real-time and assurance services, backend controls, and CI/CD security pipeline.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020817"/><stop offset=".54" stop-color="#07142d"/><stop offset="1" stop-color="#020817"/></linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123d7d"/><stop offset="1" stop-color="#08234f"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b1933"/><stop offset="1" stop-color="#071126"/></linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000817" flood-opacity=".55"/></filter>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#21549c" stroke-opacity=".13" stroke-width="1"/></pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L8 4.5L0 9Z" fill="#5b9fff"/></marker>
+    <style>
+      .eyebrow{font:600 11px Arial,sans-serif;letter-spacing:2px;fill:#67a8ff}.title{font:700 30px Arial,sans-serif;fill:#f6f9ff}.sub{font:400 14px Arial,sans-serif;fill:#9fb3d2}.lane{font:700 12px Arial,sans-serif;letter-spacing:1.8px;fill:#78aaff}.node{fill:url(#card);stroke:#284f89;stroke-width:1.4}.node2{fill:#0a1830;stroke:#315d9e;stroke-width:1.5}.main{fill:url(#core);stroke:#66a5ff;stroke-width:1.8}.nhead{font:700 15px Arial,sans-serif;fill:#eff6ff}.nsub{font:400 11px Arial,sans-serif;fill:#9eb3d4}.small{font:600 12px Arial,sans-serif;fill:#dbeaff}.line{fill:none;stroke:#4c86d7;stroke-width:1.5;stroke-opacity:.82;marker-end:url(#arrow)}.softline{fill:none;stroke:#315e9c;stroke-width:1.2;stroke-opacity:.85;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1774" height="887" fill="url(#bg)"/>
+  <rect width="1774" height="887" fill="url(#grid)"/>
+  <ellipse cx="905" cy="280" rx="560" ry="300" fill="#1262ca" opacity=".08"/>
+
+  <!-- header -->
+  <g transform="translate(60 43)">
+    <text class="eyebrow" x="0" y="0">ARCHITECTURE OVERVIEW</text>
+    <text class="title" x="0" y="39">Aetos AI Security Mentor</text>
+    <text class="sub" x="0" y="65">A secure learning and operational platform for agentic AI</text>
+    <g transform="translate(1510 -15)"><rect x="0" y="0" width="146" height="35" rx="17" fill="#0b2348" stroke="#316fc4"/><circle cx="21" cy="17" r="6" fill="#21d4ad"/><text class="small" x="38" y="21">SYSTEM FLOW</text></g>
+  </g>
+
+  <!-- main entry -->
+  <g filter="url(#shadow)">
+    <rect class="node2" x="186" y="139" width="286" height="64" rx="12"/>
+    <circle cx="218" cy="171" r="13" fill="#173a70" stroke="#6ba6ff"/><path d="M211 174q7-13 14 0M214 167a5 5 0 1 1 8 0" fill="none" stroke="#b8d7ff" stroke-width="1.5"/>
+    <text class="nhead" x="245" y="168">User / Security Learner</text><text class="nsub" x="245" y="186">guidance, questions &amp; training</text>
+    <rect class="main" x="592" y="126" width="560" height="90" rx="15" filter="url(#glow)"/>
+    <circle cx="633" cy="171" r="19" fill="#0b2d63" stroke="#86baff"/><path d="M633 155l10 5v9c0 8-5 14-10 17-5-3-10-9-10-17v-9z" fill="none" stroke="#c5e1ff" stroke-width="2"/><path d="M628 170l4 4 7-8" fill="none" stroke="#20d5aa" stroke-width="2"/>
+    <text class="nhead" x="667" y="164" font-size="18">AetosAI Frontend Interface</text><text class="nsub" x="667" y="187">unified security workspace · chat · voice · operations</text>
+    <rect class="node2" x="1300" y="139" width="288" height="64" rx="12"/>
+    <circle cx="1332" cy="171" r="13" fill="#173a70" stroke="#6ba6ff"/><path d="M1326 171h12M1332 165v12" stroke="#b8d7ff" stroke-width="1.8"/>
+    <text class="nhead" x="1359" y="168">CI/CD Security Pipeline</text><text class="nsub" x="1359" y="186">continuous software assurance</text>
+  </g>
+  <path class="line" d="M472 171H581"/><path class="line" d="M1152 171H1289"/>
+
+  <!-- lanes -->
+  <rect x="60" y="270" width="930" height="544" rx="20" fill="#061329" fill-opacity=".76" stroke="#1d457e"/>
+  <rect x="1015" y="270" width="699" height="544" rx="20" fill="#061329" fill-opacity=".76" stroke="#1d457e"/>
+  <text class="lane" x="93" y="305">LEARNING &amp; GUIDANCE WORKFLOWS</text><text class="sub" x="93" y="327">Context-rich AI security mentoring and protective boundaries</text>
+  <text class="lane" x="1047" y="305">REAL-TIME ASSURANCE &amp; OPERATIONS</text><text class="sub" x="1047" y="327">Live interaction, compliance evidence, auditing and health</text>
+
+  <!-- left upper nodes -->
+  <g filter="url(#shadow)">
+    <rect class="node" x="91" y="360" width="245" height="78" rx="12"/><text class="nhead" x="115" y="392">Mentor Chat Workflow</text><text class="nsub" x="115" y="414">guided security conversation</text>
+    <rect class="node" x="365" y="360" width="245" height="78" rx="12"/><text class="nhead" x="389" y="392">Scenario Engine</text><text class="nsub" x="389" y="414">risk-based learning prompts</text>
+    <rect class="node" x="639" y="360" width="320" height="78" rx="12"/><text class="nhead" x="663" y="388">AI Security Reference Library</text><text class="nsub" x="663" y="412">OWASP · MITRE · frameworks · controls</text>
+    <rect class="main" x="309" y="492" width="430" height="78" rx="14"/><circle cx="345" cy="531" r="15" fill="#0b2d63" stroke="#86baff"/><path d="M338 531h14M345 524v14" stroke="#c5e1ff" stroke-width="1.6"/><text class="nhead" x="377" y="525">Backend API Layer</text><text class="nsub" x="377" y="547">orchestration, policy enforcement &amp; provider access</text>
+  </g>
+  <path class="softline" d="M214 438C214 465 350 466 405 488"/><path class="softline" d="M488 438V487"/><path class="softline" d="M799 438C799 465 697 466 643 488"/>
+  <path class="softline" d="M872 216C872 255 206 258 214 350"/><path class="softline" d="M872 216C872 260 488 260 488 350"/><path class="softline" d="M872 216C872 260 799 260 799 350"/>
+
+  <!-- left controls -->
+  <g filter="url(#shadow)">
+    <rect class="node2" x="91" y="645" width="190" height="94" rx="12"/><circle cx="119" cy="674" r="10" fill="#0a315e"/><text class="small" x="137" y="677">MENTOR CORE RULES</text><text class="nsub" x="115" y="709">guardrails &amp; coaching policy</text>
+    <rect class="node2" x="304" y="645" width="190" height="94" rx="12"/><circle cx="332" cy="674" r="10" fill="#0a315e"/><text class="small" x="350" y="677">COMPLIANCE CONTROLS</text><text class="nsub" x="328" y="709">evidence-aligned checks</text>
+    <rect class="node2" x="517" y="645" width="190" height="94" rx="12"/><circle cx="545" cy="674" r="10" fill="#0a315e"/><text class="small" x="563" y="677">HONEYPOT PROTECTION LAYER</text><text class="nsub" x="541" y="709">adversarial signal capture</text>
+    <rect class="node2" x="730" y="645" width="190" height="94" rx="12"/><circle cx="758" cy="674" r="10" fill="#0a315e"/><text class="small" x="776" y="677">LLM PROVIDER BOUNDARY</text><text class="nsub" x="754" y="709">controlled model access</text>
+  </g>
+  <path class="line" d="M405 570V621H186V637"/><path class="line" d="M476 570V637"/><path class="line" d="M548 570V621H612V637"/><path class="line" d="M643 570V621H825V637"/>
+
+  <!-- right cards and service layer -->
+  <g filter="url(#shadow)">
+    <rect class="node" x="1047" y="360" width="145" height="78" rx="12"/><text class="nhead" x="1063" y="390" font-size="13">Voice Interaction</text><text class="nhead" x="1063" y="408" font-size="13">Path</text>
+    <rect class="node" x="1210" y="360" width="145" height="78" rx="12"/><text class="nhead" x="1226" y="390" font-size="13">Compliance</text><text class="nhead" x="1226" y="408" font-size="13">Dashboard</text>
+    <rect class="node" x="1373" y="360" width="145" height="78" rx="12"/><text class="nhead" x="1389" y="390" font-size="13">Red-Team Audit</text><text class="nhead" x="1389" y="408" font-size="13">Dashboard</text>
+    <rect class="node" x="1536" y="360" width="145" height="78" rx="12"/><text class="nhead" x="1552" y="390" font-size="13">System Health</text><text class="nhead" x="1552" y="408" font-size="13">HUD</text>
+    <rect class="node2" x="1047" y="492" width="145" height="78" rx="12"/><text class="small" x="1063" y="525">LIVE WEBSOCKET</text><text class="small" x="1063" y="542">BRIDGE</text>
+    <rect class="node2" x="1210" y="492" width="145" height="78" rx="12"/><text class="small" x="1226" y="525">COMPLIANCE</text><text class="small" x="1226" y="542">EVIDENCE API</text>
+    <rect class="node2" x="1373" y="492" width="145" height="78" rx="12"/><text class="small" x="1389" y="525">RED-TEAM AUDIT</text><text class="small" x="1389" y="542">APIs</text>
+    <rect class="node2" x="1536" y="492" width="145" height="78" rx="12"/><text class="small" x="1552" y="525">HEALTH API</text>
+    <rect class="main" x="1210" y="645" width="308" height="94" rx="14"/><circle cx="1245" cy="691" r="15" fill="#0b2d63" stroke="#86baff"/><path d="M1238 692l5 5 10-12" fill="none" stroke="#20d5aa" stroke-width="2"/><text class="nhead" x="1271" y="682">Security Artifacts and Controls</text><text class="nsub" x="1271" y="705">scan evidence · policies · audit records</text>
+  </g>
+  <path class="softline" d="M1119 438V487"/><path class="softline" d="M1282 438V487"/><path class="softline" d="M1445 438V487"/><path class="softline" d="M1608 438V487"/>
+  <path class="softline" d="M1119 570V610H1281V637"/><path class="softline" d="M1282 570V637"/><path class="softline" d="M1445 570V610H1447V637"/><path class="softline" d="M1608 570V610H1447V637"/>
+  <path class="softline" d="M872 216C872 258 1119 260 1119 350"/><path class="softline" d="M872 216C872 260 1282 260 1282 350"/><path class="softline" d="M872 216C872 260 1445 260 1445 350"/><path class="softline" d="M872 216C872 260 1608 260 1608 350"/>
+
+  <!-- CI/CD pipeline -->
+  <g filter="url(#shadow)">
+    <rect class="node2" x="1426" y="93" width="268" height="35" rx="9"/><text class="small" x="1450" y="115">BUILD · SCA · SECRET SCAN · CODEQL</text>
+  </g>
+  <path class="softline" d="M1444 203V216H1560V136"/>
+  <text class="sub" x="60" y="856">Every learner interaction is routed through secure services, protective controls, and continuous security evidence.</text>
+</svg>
