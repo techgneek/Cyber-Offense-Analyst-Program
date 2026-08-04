@@ -7,6 +7,7 @@
 | Ticket source | `issues/AF-001-broken-access-control.md` |
 | Finding ID | AF-001 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Endpoint | `GET /api/tenants/:tenantId/compliance/evidence/:evidenceId` |
 | Ownership and priority | Suggested owner: API owner, Priority: P1 |
 | Problem statement | Tenant-scoped evidence lookup exposed data that should have been blocked by authorization |
@@ -33,7 +34,7 @@
 | Risk | Unauthorized access to tenant-scoped evidence |
 | Ticket | `issues/AF-001-broken-access-control.md` |
 | Priority | P1 |
-| Discovery-phase handoff | Ticket prepared for remediation planning and implementation in the next section |
+| Closure state | Remediation complete; passing retest evidence recorded; final status Closed |
 | Validation reference | Before/after evidence for the tenant-mismatch request in `Evidence Screenshots/` |
 
 ## Visual Evidence

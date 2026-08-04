@@ -77,7 +77,7 @@ Do not use Burp to launch destructive or high-volume attacks in the first assess
 
 ### 6. Record Findings
 
-Capture validated issues in [../../findings/templates/finding-template.md](../../findings/templates/finding-template.md) and log tracking rows in [../../findings/templates/analyst-investigation-workbook.csv](../../findings/templates/analyst-investigation-workbook.csv).
+Capture validated issues in [../../findings/templates/finding-template.md](../../findings/templates/finding-template.md) and log tracking rows in the [live analyst workbook](../../findings/analyst-investigation-workbook.csv).
 
 ## Initial Validation Targets
 

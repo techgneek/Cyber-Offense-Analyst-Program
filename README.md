@@ -13,31 +13,58 @@
   <img src="https://img.shields.io/badge/Security-GitHub%20Actions%20%2B%20Burp%20%2B%20ZAP-9A3412?style=for-the-badge" alt="Security GitHub Actions Burp ZAP" />
 </p>
 
-## Inception State
+## Start Here
 
-At inception, the program was an isolated lab with useful security exercises but no single story tying the work together. The evidence trail was fragmented, the analyst workflow was not presented as a linear lifecycle, and the repository still looked more like a technical project than a polished case study.
+This repository documents a lab-only Cyber Offense Analyst workflow: assess an Azure-hosted application, validate risks within an authorized scope, record evidence, remediate the issues, and retest the same paths. It features two detailed end-to-end findings: broken access control and stored XSS, with before-and-after proof, ownership records, and metrics. The live register also preserves F-001, a separate validated and closed baseline hardening finding.
 
-## Completion State
+All activity is limited to the isolated lab, synthetic test data, and explicitly authorized testing methods. It does not target production systems, live credentials, or third-party environments.
 
-At completion, the repository presents a clean Cyber Offense Analyst case study that reads from discovery through validation. The findings, evidence, metrics, and remediation artifacts are connected in one narrative, so the reviewer can follow the program as an enterprise-style workflow instead of a set of disconnected notes.
+### Choose your review path
+
+| If you are a... | Start with | Then review |
+| --- | --- | --- |
+| Hiring or program reviewer | [Analyst lifecycle](#analyst-lifecycle) | [Featured findings](#featured-findings), [metrics](#metrics-and-reporting), and [program outcome](#lessons-learned--program-outcome) |
+| Technical reviewer | [Architecture](#architecture-at-a-glance) | [application assessment](#application-assessment), [CI/CD coverage](#cicd-and-security-testing-coverage), and [threat model](#threat-model-and-trust-boundaries) |
+| Lab operator | [Testing scope](#testing-scope-and-rules-of-engagement) | [deployment flow](#build-and-deployment-flow) and the [lifecycle runbook](docs/runbooks/lifecycle-commands.md) |
+
+## Analyst Lifecycle
+
+```text
+Assess → Deploy isolated lab → Validate risk → Record finding → Remediate → Retest → Report closure
+```
+
+1. Identify and assess the risk.
+2. Deploy or validate the isolated lab environment.
+3. Safely validate the behavior in scope.
+4. Map and prioritize the finding, then assign ownership.
+5. Apply the remediation.
+6. Retest the same path and record closure evidence.
+
+The detailed evidence, tickets, and metrics below support each stage of this lifecycle.
+
+## Featured Findings
+
+| Finding | Risk | Remediation and proof |
+| --- | --- | --- |
+| [AF-001: Broken Access Control](#1-broken-access-control) | A tenant-scoped evidence lookup exposed data without an authorization check. | An authorization guard was added; the same request was retested and returned `403 Forbidden`. |
+| [AF-002: Stored XSS Training Board](#2-stored-xss-training-board) | Stored note content rendered as executable browser markup. | The render sink was changed to safe text rendering; the same note was retested as harmless text. |
 
 ## Table of Contents
 
-- [Visual Overview](#visual-overview)
+- [Start Here](#start-here)
+- [Analyst Lifecycle](#analyst-lifecycle)
+- [Featured Findings](#featured-findings)
 - [Architecture at a Glance](#architecture-at-a-glance)
 - [Application Assessment](#application-assessment)
 - [Build and Deployment Flow](#build-and-deployment-flow)
 - [CI/CD and Security Testing Coverage](#cicd-and-security-testing-coverage)
-- [Analyst Lifecycle](#analyst-lifecycle)
 - [Testing Scope and Rules of Engagement](#testing-scope-and-rules-of-engagement)
 - [Threat Model and Trust Boundaries](#threat-model-and-trust-boundaries)
 - [Finding Intake, Risk Mapping, and Ownership](#finding-intake-risk-mapping-and-ownership)
+- [Finding Artifacts](#finding-artifacts)
 - [Remediation and Validation Proof](#remediation-and-validation-proof)
-- [Evidence Index](#evidence-index)
 - [Metrics and Reporting](#metrics-and-reporting)
 - [Lessons Learned / Program Outcome](#lessons-learned--program-outcome)
-- [Deeper Investigation Archive](#deeper-investigation-archive)
-- [Program Demos and Supporting Notes](#program-demos-and-supporting-notes)
 
 ## Architecture at a Glance
 
@@ -105,17 +132,21 @@ The lab uses a repeatable build and deploy path rather than manual console work.
 5. Verify the app responds on the generated Azure endpoint.
 6. Capture validation evidence.
 
-### Operational commands
+### Lifecycle operations
 
-| Command | Purpose |
+Before operating the lab, review the [lifecycle commands runbook](docs/runbooks/lifecycle-commands.md). It documents the required Azure, Terraform, Checkov, image, and infrastructure configuration prerequisites.
+
+| Operation | Purpose |
 | --- | --- |
-| `./scripts/deploy.sh` | Validate prerequisites, show plan, apply Terraform, deploy the app, and run a non-destructive health check. |
-| `./scripts/start.sh` | Restore the lab runtime after a stop. |
-| `./scripts/stop.sh` | Reduce runtime cost without destroying the lab. |
-| `./scripts/status.sh` | Show subscription, resource group, hosting state, URL, and readiness. |
-| `./scripts/destroy.sh` | Show the destroy plan, require confirmation, and remove the lab. |
+| Deploy | Validate prerequisites, review infrastructure changes, apply the lab stack, and confirm the environment is healthy. |
+| Start | Restore runtime capacity after a stop. |
+| Stop | Reduce runtime cost without destroying the environment. |
+| Status | Report the active subscription, resource group, hosting state, endpoint, and readiness. |
+| Destroy | Confirm the teardown plan, remove the lab, and verify cleanup. |
 
-The matching PowerShell wrappers are available under `scripts/` as well.
+Use the lifecycle runbook for the exact destroy and billing commands: [docs/runbooks/lifecycle-commands.md](docs/runbooks/lifecycle-commands.md).
+
+Stopping the lab can leave residual Azure costs for supporting resources; consult the runbook before operating or tearing down the environment.
 
 ## CI/CD and Security Testing Coverage
 
@@ -154,21 +185,6 @@ GitHub Actions is the backbone of the repository’s security pipeline and deplo
 ### CI/CD narrative note
 
 The baseline workflow set supports the current lab scope. If the lab expands later, additional workflows can be added without changing the case-study narrative.
-
-## Analyst Lifecycle
-
-The analyst workflow follows a repeatable lifecycle:
-
-1. Identify the risk.
-2. Validate the behavior.
-3. Map the issue to CWE / OWASP / ATT&CK when appropriate.
-4. Prioritize by exposure, exploitability, and impact.
-5. Assign ownership.
-6. Remediate the issue.
-7. Retest the same path.
-8. Record closure evidence.
-
-This is the linear flow the case study is meant to demonstrate.
 
 ## Testing Scope and Rules of Engagement
 
@@ -250,6 +266,7 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Ticket source | `issues/AF-001-broken-access-control.md` |
 | Finding ID | AF-001 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Ownership and priority | Suggested owner: API owner, Priority: P1 |
 | Problem statement | Tenant-scoped evidence lookup exposed data that should have been blocked by authorization |
 | OWASP linkage | OWASP A01: Broken Access Control / API1: Broken Object Level Authorization |
@@ -272,7 +289,7 @@ This case study is organized as ticket-style enterprise workflows rather than is
     </tr>
     <tr>
       <td align="center"><img src="Evidence%20Screenshots/BAC-before-tenant-mismatch.png" alt="AF-001 Burp before" width="480" /></td>
-      <td align="center"><img src="Evidence%20Screenshots/BAC-webapp-after-403.png" alt="AF-001 webapp after" width="480" /></td>
+      <td align="center"><img src="Evidence%20Screenshots/BAC-after-tenant-mismatch-fix.png" alt="AF-001 Burp after showing 403 Forbidden" width="480" /></td>
     </tr>
   </table>
 </p>
@@ -285,7 +302,7 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | `Evidence Screenshots/BAC-before-tenant-mismatch.png` | Burp before-state with the unauthorized object lookup |
 | `Evidence Screenshots/BAC-code-after.png` | Authorization guard added in code |
 | `Evidence Screenshots/BAC-after-tenant-mismatch-fix.png` | Burp after-state showing `403 Forbidden` |
-| `Evidence Screenshots/BAC-webapp-after-403.png` | Final webapp verification of the fixed behavior |
+| `Evidence Screenshots/BAC-webapp-after-403.png` | Supplementary browser validation showing the fixed behavior |
 
 **Findings mapping:**
 
@@ -320,9 +337,10 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Ticket source | `issues/AF-002-stored-xss-training-board.md` |
 | Finding ID | AF-002 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Ownership and priority | Suggested owner: frontend/application owner, Priority: P1 |
 | Problem statement | Stored note content was rendered as HTML, allowing untrusted markup to behave like executable browser content |
-| OWASP linkage | OWASP A03: Injection / A08: Software and Data Integrity Failures |
+| OWASP linkage | OWASP A03: Injection |
 | Risk statement | Persisted markup can execute in the browser, alter what analysts see, and weaken trust in the evidence trail |
 | Recommended remediation | Render stored note content as inert text or sanitize the sink before display |
 | Validation plan | Capture the vulnerable response, fix the sink, replay the same note path, and verify the payload is now harmless text |
@@ -361,7 +379,6 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Framework | Mapping | Notes |
 | --- | --- | --- |
 | OWASP Top 10 | A03 Injection | Stored XSS is part of the injection class |
-| OWASP Top 10 | A08 Software and Data Integrity Failures | Relevant when untrusted markup is persisted and replayed |
 | CWE | CWE-79 | Improper Neutralization of Input During Web Page Generation |
 | CWE | CWE-116 | Improper Encoding or Escaping of Output |
 | CVE | N/A | Custom lab code; no public CVE assigned |
@@ -385,7 +402,9 @@ These artifacts support the ticket workflow and analyst handoff.
 #### Ticket and reporting artifacts
 
 - [Finding template](findings/templates/finding-template.md)
-- [Analyst workbook](findings/templates/analyst-investigation-workbook.csv)
+- [Live analyst workbook](findings/analyst-investigation-workbook.csv)
+- [Blank workbook template](findings/templates/analyst-investigation-workbook.csv)
+- [F-001 closed finding](findings/closed/F-001-express-fingerprinting-and-missing-hardening-headers.md)
 - [Metrics overview](metrics/README.md)
 - [AF-001 ticket](issues/AF-001-broken-access-control.md)
 - [AF-002 ticket](issues/AF-002-stored-xss-training-board.md)
@@ -437,7 +456,16 @@ The value of the case study comes from showing that the same request or behavior
 
 ## Metrics and Reporting
 
-The repository already includes a lightweight metrics layer for analyst tracking.
+The repository includes a lightweight metrics layer tied to the live workbook and closure evidence. The current register contains three separate findings: F-001, AF-001, and AF-002.
+
+| Current metric | Value |
+| --- | --- |
+| Open findings | 0 |
+| Remediated findings | 3 |
+| Closed findings | 3 |
+| Passing retests | 3 of 3 (100%) |
+| Findings with documented SLA status | 1 |
+| Findings without documented SLA status | 2 |
 
 ### Useful metrics
 
@@ -454,6 +482,8 @@ The repository already includes a lightweight metrics layer for analyst tracking
 
 ### Supporting documents
 
+- [Live analyst workbook](findings/analyst-investigation-workbook.csv)
+- [AppSec findings report](reports/appsec-findings-report.md)
 - [Metrics README](metrics/README.md)
 - [Phase 7 metrics summary](metrics/phase-7-summary.md)
 

@@ -4,5 +4,6 @@ This report maps the validated findings to their primary OWASP categories.
 
 | Finding ID | OWASP Mapping |
 | --- | --- |
+| F-001 | Security Misconfiguration / API8: Security Misconfiguration |
 | AF-001 | A01: Broken Access Control |
 | AF-002 | A03: Injection / A08: Software and Data Integrity Failures |
