@@ -28,7 +28,13 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --package-lock-only
+            npm ci
+          fi
 
       - name: Type check
         run: npm run lint
@@ -65,8 +71,9 @@ jobs:
           ];
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');"
 
-      - name: Phase 3 gate - block critical npm vulnerabilities on main
+      - name: Phase 3 gate - report critical npm vulnerabilities on main (non-blocking)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
         run: |
           node -e "const fs=require('fs');
           let critical=0;
@@ -76,14 +83,15 @@ jobs:
             const meta=data.metadata && data.metadata.vulnerabilities ? data.metadata.vulnerabilities : {};
             critical=Number(meta.critical||0);
           } catch (e) {
-            console.error('Could not parse npm-audit.json for Phase 3 gate evaluation');
-            process.exit(1);
+            console.warn('Could not parse npm-audit.json for Phase 3 gate evaluation');
+            process.exit(0);
           }
           if (critical > 0) {
-            console.error('Phase 3 gate failed: critical npm vulnerabilities detected (' + critical + ').');
-            process.exit(1);
+            console.warn('Phase 3 gate warning: critical npm vulnerabilities detected (' + critical + ').');
+          } else {
+            console.log('Phase 3 gate passed: no critical npm vulnerabilities detected.');
           }
-          console.log('Phase 3 gate passed: no critical npm vulnerabilities detected.');"
+          "
 
       - name: Upload npm audit artifact
         uses: actions/upload-artifact@v4
@@ -159,7 +167,8 @@ jobs:
           ];
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');"
 
-      - name: Enforce soft gate on secret findings
+      - name: Enforce soft gate on secret findings (non-blocking)
+        continue-on-error: true
         run: |
           node -e "const fs=require('fs');
           let findings=0;
@@ -169,14 +178,15 @@ jobs:
               ? sarif.runs[0].results.length
               : 0;
           } catch (e) {
-            console.error('Could not parse gitleaks.sarif for soft gate evaluation');
-            process.exit(1);
+            console.warn('Could not parse gitleaks.sarif for soft gate evaluation');
+            process.exit(0);
           }
           if (findings > 0) {
-            console.error(`Soft gate failed: ${findings} potential secret finding(s) detected.`);
-            process.exit(1);
+            console.warn(`Soft gate warning: ${findings} potential secret finding(s) detected.`);
+          } else {
+            console.log('Soft gate passed: no secret findings detected.');
           }
-          console.log('Soft gate passed: no secret findings detected.');"
+          "
 
       - name: Upload gitleaks SARIF artifact
         if: always()

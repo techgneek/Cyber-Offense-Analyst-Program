@@ -15,7 +15,7 @@
 
 ## Start Here
 
-This repository documents a lab-only Cyber Offense Analyst workflow: assess an Azure-hosted application, validate risks within an authorized scope, record evidence, remediate the issues, and retest the same paths. It features two end-to-end findings: broken access control and stored XSS, with before-and-after proof, ownership records, and metrics.
+This repository documents a lab-only Cyber Offense Analyst workflow: assess an Azure-hosted application, validate risks within an authorized scope, record evidence, remediate the issues, and retest the same paths. It features two detailed end-to-end findings: broken access control and stored XSS, with before-and-after proof, ownership records, and metrics. The live register also preserves F-001, a separate validated and closed baseline hardening finding.
 
 All activity is limited to the isolated lab, synthetic test data, and explicitly authorized testing methods. It does not target production systems, live credentials, or third-party environments.
 
@@ -61,6 +61,7 @@ The detailed evidence, tickets, and metrics below support each stage of this lif
 - [Testing Scope and Rules of Engagement](#testing-scope-and-rules-of-engagement)
 - [Threat Model and Trust Boundaries](#threat-model-and-trust-boundaries)
 - [Finding Intake, Risk Mapping, and Ownership](#finding-intake-risk-mapping-and-ownership)
+- [Finding Artifacts](#finding-artifacts)
 - [Remediation and Validation Proof](#remediation-and-validation-proof)
 - [Metrics and Reporting](#metrics-and-reporting)
 - [Lessons Learned / Program Outcome](#lessons-learned--program-outcome)
@@ -142,6 +143,8 @@ Before operating the lab, review the [lifecycle commands runbook](docs/runbooks/
 | Stop | Reduce runtime cost without destroying the environment. |
 | Status | Report the active subscription, resource group, hosting state, endpoint, and readiness. |
 | Destroy | Confirm the teardown plan, remove the lab, and verify cleanup. |
+
+Use the lifecycle runbook for the exact destroy and billing commands: [docs/runbooks/lifecycle-commands.md](docs/runbooks/lifecycle-commands.md).
 
 Stopping the lab can leave residual Azure costs for supporting resources; consult the runbook before operating or tearing down the environment.
 
@@ -263,6 +266,7 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Ticket source | `issues/AF-001-broken-access-control.md` |
 | Finding ID | AF-001 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Ownership and priority | Suggested owner: API owner, Priority: P1 |
 | Problem statement | Tenant-scoped evidence lookup exposed data that should have been blocked by authorization |
 | OWASP linkage | OWASP A01: Broken Access Control / API1: Broken Object Level Authorization |
@@ -333,6 +337,7 @@ This case study is organized as ticket-style enterprise workflows rather than is
 | Ticket source | `issues/AF-002-stored-xss-training-board.md` |
 | Finding ID | AF-002 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Ownership and priority | Suggested owner: frontend/application owner, Priority: P1 |
 | Problem statement | Stored note content was rendered as HTML, allowing untrusted markup to behave like executable browser content |
 | OWASP linkage | OWASP A03: Injection |
@@ -397,7 +402,9 @@ These artifacts support the ticket workflow and analyst handoff.
 #### Ticket and reporting artifacts
 
 - [Finding template](findings/templates/finding-template.md)
-- [Analyst workbook](findings/templates/analyst-investigation-workbook.csv)
+- [Live analyst workbook](findings/analyst-investigation-workbook.csv)
+- [Blank workbook template](findings/templates/analyst-investigation-workbook.csv)
+- [F-001 closed finding](findings/closed/F-001-express-fingerprinting-and-missing-hardening-headers.md)
 - [Metrics overview](metrics/README.md)
 - [AF-001 ticket](issues/AF-001-broken-access-control.md)
 - [AF-002 ticket](issues/AF-002-stored-xss-training-board.md)
@@ -449,7 +456,16 @@ The value of the case study comes from showing that the same request or behavior
 
 ## Metrics and Reporting
 
-The repository already includes a lightweight metrics layer for analyst tracking.
+The repository includes a lightweight metrics layer tied to the live workbook and closure evidence. The current register contains three separate findings: F-001, AF-001, and AF-002.
+
+| Current metric | Value |
+| --- | --- |
+| Open findings | 0 |
+| Remediated findings | 3 |
+| Closed findings | 3 |
+| Passing retests | 3 of 3 (100%) |
+| Findings with documented SLA status | 1 |
+| Findings without documented SLA status | 2 |
 
 ### Useful metrics
 
@@ -466,6 +482,8 @@ The repository already includes a lightweight metrics layer for analyst tracking
 
 ### Supporting documents
 
+- [Live analyst workbook](findings/analyst-investigation-workbook.csv)
+- [AppSec findings report](reports/appsec-findings-report.md)
 - [Metrics README](metrics/README.md)
 - [Phase 7 metrics summary](metrics/phase-7-summary.md)
 

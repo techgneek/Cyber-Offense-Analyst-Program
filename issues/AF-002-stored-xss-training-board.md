@@ -7,6 +7,7 @@
 | Ticket source | `issues/AF-002-stored-xss-training-board.md` |
 | Finding ID | AF-002 |
 | Ticket phase | Discovery → Investigation → Remediation → Validation |
+| Final status | Closed; remediation and retesting complete |
 | Endpoint | `POST /api/training/xss-notes` and the notes rendering path in the web UI |
 | Ownership and priority | Suggested owner: frontend/application owner, Priority: P1 |
 | Problem statement | Stored note content was rendered as HTML, allowing untrusted markup to behave like executable browser content |
@@ -33,7 +34,7 @@
 | Risk | Stored browser-side execution from untrusted note content |
 | Ticket | `issues/AF-002-stored-xss-training-board.md` |
 | Priority | P1 |
-| Discovery-phase handoff | Ticket prepared for remediation planning and implementation in the next section |
+| Closure state | Remediation complete; passing retest evidence recorded; final status Closed |
 | Validation reference | Before/after evidence for the training note board in `Evidence Screenshots/` |
 
 ## Visual Evidence

@@ -20,6 +20,37 @@ These commands are the operational wrapper around the lab Terraform stack and Az
 - Status: report the active subscription, resource group, hosting status, endpoint, and readiness indicators.
 - Destroy: confirm the teardown plan, remove the lab, and verify cleanup.
 
+## Destroy And Billing
+
+Use the resource group as the teardown boundary for this lab. The lab resources are tagged and grouped under the isolated Azure resource group, so deleting that group removes the hosting, monitoring, and registry resources created for the exercise.
+
+1. Identify the lab resource group if you do not already have it.
+
+```bash
+az group list --tag project=cyber-offense-lab --query "[].name" -o tsv
+```
+
+2. Delete the lab resource group.
+
+```bash
+az group delete --name <resource-group-name> --yes
+```
+
+3. Wait for Azure to finish the deletion and verify cleanup.
+
+```bash
+az group wait --deleted --name <resource-group-name> --interval 10 --timeout 1800
+az group exists --name <resource-group-name>
+```
+
+4. Query billing at the resource-group scope if you need the accrued lab cost before or after teardown.
+
+```bash
+az rest --method post --url "https://management.azure.com/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.CostManagement/query?api-version=2023-11-01" --body '{"type":"ActualCost","timeframe":"Custom","timePeriod":{"from":"2026-08-01T00:00:00Z","to":"2026-08-02T23:59:59Z"},"dataset":{"granularity":"None","aggregation":{"totalCost":{"name":"PreTaxCost","function":"Sum"}}}}' -o json
+```
+
+The returned `rows[0][0]` value is the pre-tax cost and `rows[0][1]` is the currency. Adjust the date range to match the exact period you want to report.
+
 ## Residual Cost Notes
 
 Stopping the lab does not make Azure free. Plan for residual cost from hosting plans, logging workspaces, storage accounts, and any other supporting services that remain allocated.
