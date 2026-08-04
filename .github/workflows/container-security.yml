@@ -70,7 +70,7 @@ jobs:
 
       - name: Trivy filesystem scan
         if: steps.dockerfile.outputs.present == 'true'
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.33.1
         with:
           scan-type: fs
           scan-ref: .
@@ -81,7 +81,7 @@ jobs:
 
       - name: Trivy image scan
         if: steps.dockerfile.outputs.present == 'true'
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: aetosai-security-mentor:scan
           severity: HIGH,CRITICAL
