@@ -17,8 +17,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Dependency review
-        uses: actions/dependency-review-action@v4
         with:
-          fail-on-severity: high
+          fetch-depth: 2
+
+      - name: Detect npm dependency changes
+        id: npm_changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --no-tags --depth=1 origin "${BASE_SHA}"
+          if git diff --name-only "${BASE_SHA}" HEAD | grep -Eq '(^|/)(package(-lock)?\.json)$'; then
+            echo "changed=true" >>"$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Audit npm dependencies
+        if: steps.npm_changes.outputs.changed == 'true'
+        run: npm audit --package-lock-only --audit-level=high
+
+      - name: No npm dependency changes
+        if: steps.npm_changes.outputs.changed != 'true'
+        run: echo "No npm dependency manifest changes detected."
