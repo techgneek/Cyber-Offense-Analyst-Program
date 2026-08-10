@@ -39,16 +39,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check for Dockerfile
+        id: dockerfile
+        run: echo "present=${{ hashFiles('Dockerfile') != '' }}" >> "$GITHUB_OUTPUT"
+
       - name: Hadolint Dockerfile lint
+        if: steps.dockerfile.outputs.present == 'true'
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: Dockerfile
           failure-threshold: error
 
       - name: Set up Docker Buildx
+        if: steps.dockerfile.outputs.present == 'true'
         uses: docker/setup-buildx-action@v3
 
       - name: Build lab image for scanning
+        if: steps.dockerfile.outputs.present == 'true'
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -57,6 +64,7 @@ jobs:
           tags: aetosai-security-mentor:scan
 
       - name: Trivy filesystem scan
+        if: steps.dockerfile.outputs.present == 'true'
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
@@ -67,6 +75,7 @@ jobs:
           format: table
 
       - name: Trivy image scan
+        if: steps.dockerfile.outputs.present == 'true'
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: aetosai-security-mentor:scan
@@ -74,3 +83,7 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
           format: table
+
+      - name: Skip container scan when Dockerfile is absent
+        if: steps.dockerfile.outputs.present != 'true'
+        run: echo "No root Dockerfile found; skipping Dockerfile lint and Trivy image scan."
